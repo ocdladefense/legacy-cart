@@ -6,6 +6,8 @@
 	
 	let testDomains = ["ocdpartial-ocdla.cs217.force.com","membertest.ocdla.org"];
 	
+	let prodDomains = ["ocdla.force.com","members.ocdla.org"];
+	
 	
 	let production = {
 		storeCookieId: 'apex__00D6300000097I4EAI-fonteva-shopping-cart',
