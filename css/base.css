@@ -1,0 +1,201 @@
+#catalogLoadingStage
+{
+	position:absolute;
+	display:none;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background-color:transparent;
+	z-index:9;
+}
+
+.catalogLoading #catalogLoadingStage
+{
+	display:block;
+	background-color:rgba(255,255,255,0.8);
+	background-image:url('https://membertest.ocdla.org/sites/all/modules/cart/images/ajax-loader-large.gif');
+	background-attachment:scroll;
+	background-position: center 100px;
+	background-repeat:no-repeat;
+}
+
+
+.catalog-active {
+	background-color:#eee;
+	text-decoration:none;
+}
+
+li.all-catalogs
+{
+	display:none !important;
+}
+.background
+{   
+    background-color:#ffffff !important;
+}
+
+
+#ocdla-nav a:hover
+{
+    color: #101010 !important;
+}
+
+#ocdla-nav {
+  text-align: center;
+  list-style: none;
+  padding: 1px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+#ocdla-nav li {
+  font-weight: bold;
+  line-height: 10px;
+  height: 10px;
+  border-bottom: none;
+  display: inline-block;
+  margin-right: -4px;
+  flex-grow: 1;
+  text-align: center;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#ocdla-nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+#ocdla-nav a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
+}
+
+.information .m-b-0 
+{
+	color: #f39c12;
+	display: block;
+	font-size: 22px;
+	width:85%;
+}
+
+.search.result .background .date
+{
+	width:70px;
+	top: 0px;
+	
+}
+
+.search.result .information h1
+{
+    color: #666;
+    display: block;
+    font-size: 14px;
+}
+
+/**
+* new styles as of 2/1/2016
+*/
+.search.result
+{
+	min-height: 45px;
+	height:auto;
+}
+
+.col-lg-4,
+.col-md-4
+{
+	float:none;
+	width:95%;
+}
+
+.search.result .information
+{
+	position: static;
+	max-height: none;
+	width:auto;
+	padding:0px;
+	background: none no-repeat 100% #fff;
+	min-height:45px;
+}
+
+.search.result .information hr,
+.search.result .information p.description
+{
+	display:none;
+}
+
+
+.search.result .background
+{
+	position: static;
+	max-height: none;
+	width:auto;
+	transition-property:none !important;
+	height:auto;
+}
+
+.search.result a
+{
+	color:#333;
+}
+
+.search.result a:hover
+{
+/*	border:1px solid #999;*/
+}
+
+
+
+.CPBase__item .row .m-b-15 .m-b-15 span[id*='itemForm']
+{
+	display:block;
+	width:60%;
+	max-width:80%;
+	min-height:600px;
+}
+
+
+
+.bt-angle-right::before
+{
+	margin-right:-60px;
+}
+
+
+
+/**
+Events
+**/
+.CPBase__events .search.result .information
+{
+	min-height:75px;
+}
+
+.CPBase__events .search.result
+{
+	min-height:75px;
+}
+
+
+.CPBase__events .search.result .information p
+{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);	
+/*  width:85%;*/
+}
+
+.date.bg-primary
+{
+	display:none;
+}
+
+

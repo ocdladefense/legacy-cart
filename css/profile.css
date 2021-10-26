@@ -1,0 +1,30 @@
+
+/**
+ * Profile css here
+
+ 
+ .container-fluid {
+ 	display:none;
+ }
+ 
+ .em-cover,
+ #em-payment-methods-tab,
+ #em-subscriptions-tab,
+ #em-payments-tab,
+ #em-groups-tab {
+ 	display:none;
+ }
+ 
+ */
+ 
+ .em-cover,
+ #em-payment-methods-tab,
+ #em-payments-tab,
+ #em-subscriptions-tab,
+ #em-groups-tab {
+ 	display:none;
+ }
+ 
+ li a.link-site {
+ 	display:none;
+ }

@@ -1,0 +1,195 @@
+/**
+ * File: catalog.css
+ * Description: For use with the custom Ocdla_Store_Item
+ * Visualforce page.
+ */
+
+.Ocdla_Store_Item table
+{
+	width: auto;
+}
+
+
+.Ocdla_Store_Item td,
+.Ocdla_Store_Item th
+{
+	padding:0px;
+}
+
+
+.Ocdla_Store_Item input[id^="item-quantity"]
+{
+	width:75px;
+}
+
+.Ocdla_Store_Item .pbHeader h2
+{
+	font-size:12pt;
+}
+
+#ocdla-layout-block-2
+{
+	width:200px;
+	float:left;
+	height:auto;
+	min-height:1200px;
+	margin:0px !important;
+	padding:5px !important;
+}
+
+#ocdla-layout-block-1
+{
+	margin-top:10px;
+}
+
+.product-image
+{
+	width:auto;
+	float:right;
+	padding:10px;
+}
+
+table[id*="itemForm:item-options"]
+{
+	clear:both;
+	width:625px !important;
+}
+
+tbody[id*="itemForm:item-options"] td,
+tbody[id*="itemForm:item-options"] th
+{
+	padding:2px;
+}
+
+.form-control, .navbar-search .navbar-search-input
+{
+	width:75px;
+}
+
+
+div[id*="itemForm:item-options"]
+{
+	clear:both;
+}
+
+
+div[id*="ocdla-add-to-cart-button"]
+{
+	display:block;
+	clear:left;
+}
+
+#ocdla-product-description
+{
+	width:95%;
+}
+
+td[id*="ocdla-product-option-name"]
+{
+	max-width:200px;
+}
+
+td[id*="ocdla-product-option-price"]
+{
+	max-width:200px;
+}
+
+.ocdla-middle-col
+{
+	width:700px;
+	float:left;
+	border:1px solid dashed;
+}
+
+.col-sm-3
+{
+	width:200px;
+	float:left;
+	height:1200px;
+}
+
+.product-options-label
+{
+	font-size:14px;
+}
+
+
+
+
+@media only screen and (max-width:1024px)
+{
+	.col-sm-3,.navbar-brand,
+	#ocdla-layout-block-1,
+	#ocdla-layout-block-2
+	{
+		display:none;
+	}
+	.page-wrapper
+	{
+		overflow-x:hidden;
+	}
+	.ocdla-middle-col
+	{
+		padding-left:10px;
+		padding-right:10px;
+		float:none;
+		width:auto;
+	}
+	.col-sm-9
+	{
+		padding-left:0px;
+	}
+}
+
+@media only screen and (max-device-width: 480px) {
+
+}
+
+
+#shoppingcart-modal .col-sm-3 {
+    float: none;
+    height: auto;
+    width: auto;
+}
+
+
+
+.col-sm-3 {
+	width: 20%;
+	padding-right:35px;
+}
+
+
+.col-sm-9,
+.col-sm-12
+{
+	padding-left:0px;
+}
+
+.row {
+	margin-left:0px;
+	margin-right:0px;
+}
+
+
+.ocdla-middle-col h2 {
+	margin-top:0px !important;
+}
+
+h2 {
+	margin-top:0px !important;
+}
+
+form[id*=itemForm] .col-sm-9 {
+	margin-top:19px;
+}
+
+
+
+div[id*=ocdla-add-to-cart-button] {
+	margin-bottom:23px;
+}
+
+.m-b-15 {
+	margin-bottom:0px !important;
+}

@@ -1,0 +1,30 @@
+#colorbox {
+	background-color:#fff;
+	padding:20px;
+	border:1px solid #666;
+}
+
+
+#colorbox li {
+	float:left;
+	height:35px;
+	list-style:none;
+}
+
+#colorbox ul {
+	width:80%;
+	float:none;
+	display:block;
+}
+
+.option-name {
+	width:200px;
+}
+
+.option-price {
+	width:75px;
+}
+
+.option-quantity {
+	width:50px;
+}

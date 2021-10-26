@@ -1,0 +1,243 @@
+<?php
+use Clickpdx\Core\Http\OcdlaCatalogProductDestination;
+use Ocdla\Product;
+use Ocdla\ProductAttributes;
+use Ocdla\Session;
+ 
+ 
+ /**
+ * cart.module
+ */
+function cart_menu() {
+	$items = array();
+	
+	$items['ocdla/cart/add'] = array(
+		'name' => 'OCDLA',
+		'page callback' => 'ocdla_add_cart_items',
+		'title' => 'OCDLA',
+		'access' => TRUE,
+		'#theme' => 'ocdla',
+		'files' => array(
+			'includes/theme.inc',	
+			'includes/cart.inc'
+		)
+	);	
+	
+	$items['cart/add'] = array(
+		'name' => 'OCDLA',
+		'page callback' => 'ocdla_add_cart_items_test',
+		'title' => 'OCDLA',
+		'access' => TRUE,
+		'#theme' => 'ocdla',	
+		'files' => array(
+			'includes/theme.inc',	
+			'includes/cart.inc'
+		)
+	);	
+	
+	$items['ocdla/cart/test/add'] = array(
+		'name' => 'OCDLA',
+		'page callback' => 'hasMembershipInCart',
+		'title' => 'OCDLA',
+		'access' => TRUE,
+		'#theme' => 'ocdla',	
+	);	
+	return $items;
+}
+ 
+ 
+function ocdla_add_cart_items_test($args = array())
+{
+	global $user, $request;
+
+	$form = clickpdx_get_form('ocdla_add_to_cart_form');
+	print "This site is undergoing maintenance and will be back shortly.";
+	exit;
+	// print "Itemids bound to this request are: ".entity_toString($_GET['itemid']); 
+
+	// Prepare	
+	$form_state = cart_form_add_items_from_request();
+	
+	// Uncomment the line below
+	//	+ in order to abort redirects by setting the api value to true.
+	// $form_state['#api'] = true;
+	$form_state['values']['form_id'] = 'ocdla_add_to_cart_form';
+	$form = drupal_process_form($form,$form_state);
+	exit;
+}
+
+
+function cart_form_add_items_from_request()
+{
+	$items = getRequestProducts();
+	foreach($items as $item)
+	{
+		cart_form_add_item($form_state,$item['id'],$item['quantity']);
+	}
+	return $form_state;
+}
+
+
+function cart_form_add_item(&$form_state,$itemid,$quantity)
+{
+	if(!isset($form_state['values'])) $form_state['values']=array();
+	if(!isset($form_state['values']['itemid']))
+	{
+		$form_state['values']['itemid']=array();
+		$form_state['values']['quantity']=array();
+	}
+	$form_state['values']['itemid'][] = $itemid;
+	$form_state['values']['quantity'][] = $quantity;
+}
+
+
+ 
+
+ 
+ 
+function ocdla_add_to_cart_form($form, &$form_state)
+{
+	$form_state['redirect'] = array(
+		new OcdlaCatalogProductDestination($form_state['values']['parent_i']),
+	);
+	
+	return $form;
+}
+
+
+
+
+function ocdla_add_to_cart_form_validate($form, &$form_state)
+{
+	global $user, $sess;
+
+	// Test to see if the user has an authenticated session
+	// 	+ if not then give this user a chance to login.
+	$form_state['items'] = getRequestProducts();
+
+	if(count($form_state['items'])<1)
+	{
+		throw new Exception("You didn't enter any quantities.");
+	}
+	
+	if($sess->hasAuthenticatedSession()) return true;
+	
+	$form_state['products'] = product_load_multiple(array_keys($form_state['items']));
+
+	// Add the script name to the form
+	$form_state['referrer'] 	= getCartReferrer($_POST['script_name'],$_POST['parent_i']);
+
+	$require_auth 						= checkRequiresMembership($form_state['products']);
+
+	$hasMembershipInCart 			= checkIsMembershipProduct($form_state['products']);
+
+	// If the user has a membership in their cart,
+	// then let them purchase the products, anyways at the member price.
+	if(hasMembershipInCart($sess->getSessionId())) return true;
+	
+	if(!$hasMembershipInCart&&!$_SESSION['cart']['first_click'])
+	{
+		cart_force_form_first_click_redirect($form_state);
+		return false;
+	}
+	
+	if($require_auth && !user_has_role('admin') && !user_has_role('member')&&!$hasMembershipInCart)
+	{
+		cart_force_authorization_redirect($form_state);
+		return false;
+	}
+
+	return true;
+}
+
+
+function ocdla_add_to_cart_form_submit($form, &$form_state)
+{
+	global $user, $sess;
+
+	if(count($form_state['items']) > 0)
+	{
+		cart_add_items($form_state['items']);
+	}
+	$form_state['redirect'] = array(
+		'server' 		=> 'www.ocdla.org',
+		'type'			=> 'external',
+		'value'			=> 'cart/viewcart_newocdla.cfm'
+	);
+}
+
+
+
+
+/**
+ * @function cart_add_items
+ *
+ * @scope - no variables in 
+ *
+ */
+function cart_add_items($items)
+{
+	global $user, $sess;
+	$test = $user->getMemberId() == 25060 ? true : false;
+	if($test) print "Preparing to add items...\n";
+
+	foreach($items AS $itemid=>$quantity)
+	{
+		if($test) print "Processing item {$itemid} with qty {$quantity}.\n";
+
+		// if the user didn't specify a quantity then
+		// don't attempt to add this item to the cart
+		if($quantity < 1) continue;
+		if($test) print "\nAdding item {$itemid}...";		
+		// otherwise
+		// do a lookup on the id to fetch info about this product
+		$lookup = new DBQuery(
+			array(
+				'type' => 'select',
+				'tablenames' => array(
+					0 => array(
+						'name'=>'catalog',
+						'fields'=>array(),
+						'op'=>null,
+					)
+				),
+				'where' => array(
+					"i={$itemid}"
+				)
+			)
+		
+		);
+		$results = $lookup->exec();
+		$info = $results[0];
+		
+		$price = user_has_role('admin') || user_has_role('member') || hasMembershipInCart($sess->getSessionId()) ? $info['Price'] : $info['RegularPrice'];
+
+		$add_to_cart = new DBQuery(
+			array(
+				'type' => 'insert',
+				'tablenames' => array(
+					0 => array(
+						'name' => 'cart',
+						'fields' => array(),
+						'op' => '',
+					),
+				),
+				'fields' => array(
+					'Customer_ID' => $sess->getSessionId(),
+					'ItemNumber' => $itemid,
+					'ItemQuantity' => $quantity,
+					'totalitemprice' => $price,
+				),
+			)
+		);
+	}
+}
+
+
+
+
+function ocdla_add_cart_items($args = array())
+{
+	// print "Cart test.";exit;
+	$form = clickpdx_get_form('ocdla_add_to_cart_form');
+}
