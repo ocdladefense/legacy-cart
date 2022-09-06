@@ -4,7 +4,7 @@
 	
 	let config = {};
 	
-	let testDomains = ["ocdpartial-ocdla.cs217.force.com","membertest.ocdla.org","ocdla--ocdpartial--clickpdxorder.visualforce.com"];
+	let testDomains = ["ocdpartial-ocdla.cs198.force.com","membertest.ocdla.org","ocdla--ocdpartial--clickpdxorder.visualforce.com","ocdla--ocdpartial.sandbox.my.site.com"];
 	
 	let prodDomains = ["ocdla.force.com","members.ocdla.org","ocdla--clickpdxorder.na159.visual.force.com"];
 	
