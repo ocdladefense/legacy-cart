@@ -171,11 +171,14 @@ div[id*="ocdla-add-to-cart-button"] {
     display: grid;
 
     /* 2. Define 3 equal columns that adjust to fit the container */
-    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
     /* Specific gap controls */
     row-gap: 30px; /* Vertical space between rows */
     column-gap: 15px; /* Horizontal space between columns */
+    align-items: stretch;
+    grid-auto-rows: minmax(150px, auto);
   }
 
   .catalog-item .product-price {
@@ -202,6 +205,7 @@ div[id*="ocdla-add-to-cart-button"] {
 
     /* Optional: Ensure a border or background highlights the spacing */
     border: 1px solid #ccc;
+    border-radius: 3px;
     padding: 16px;
   }
 
