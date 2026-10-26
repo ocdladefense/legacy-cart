@@ -162,7 +162,7 @@ div[id*="ocdla-add-to-cart-button"] {
   margin-bottom: 8px;
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 300px) {
   /*
     Display grid layout for product catalog items
     */
@@ -226,5 +226,25 @@ div[id*="ocdla-add-to-cart-button"] {
   .sticky-bottom {
     /* 2. Push this element all the way to the bottom of its flex container */
     margin-top: auto;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .catalog-item {
+    max-width: 60%;
+    margin: auto;
+  }
+  .catalog-item .product-image {
+    width: auto;
+    padding: 10px 0px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .two-columns .column-first {
+    width: 23%;
+  }
+  .column-first .content {
+    padding: 5px;
   }
 }
