@@ -189,8 +189,17 @@ div[id*="ocdla-add-to-cart-button"] {
     font-size: 14px;
   }
 
-  .catalog-item h2 {
+  .catalog-item h2.product-title {
     font-weight: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    /* 1. Set the exact number of lines allowed before truncating */
+    -webkit-line-clamp: 2;
+
+    /* 2. Hide the text that overflows past those lines */
+    overflow: hidden;
+    width: auto;
   }
 
   .product-results-container .catalog-item h2 {
