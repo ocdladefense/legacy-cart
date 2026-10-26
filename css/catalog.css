@@ -189,6 +189,11 @@ div[id*="ocdla-add-to-cart-button"] {
     font-size: 14px;
   }
 
+  .catalog-item .product-image {
+    width: auto;
+    padding: 10px 0px;
+  }
+
   .catalog-item h2.product-title {
     font-weight: normal;
     display: -webkit-box;
